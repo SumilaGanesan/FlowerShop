@@ -1,963 +1,572 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarketHaus — Everything Store</title>
-<style>
-  :root{
-    --navy:#131921;
-    --navy-light:#232f3e;
-    --navy-hover:#37475a;
-    --accent:#ff9900;
-    --accent-hover:#e88a00;
-    --bg:#eaeded;
-    --card:#ffffff;
-    --text:#0f1111;
-    --text-secondary:#565959;
-    --border:#d5d9d9;
-    --success:#067d62;
-    --link:#007185;
-    --price:#B12704;
-    --radius:8px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--link); text-decoration:none; cursor:pointer;}
-  button{font-family:inherit; cursor:pointer;}
-  img,svg{display:block;}
+<html>
+    <head>
+        <title>Document</title>
+        
+    </head>
+        <style>
+            header{
+                 background:linear-gradient(90deg,#ff758c,#ff7eb3);
+                 color:white;
+                 padding:25px;
+                 text-align:center;
+                 font-size:22px;
+                 letter-spacing:2px;
+            }
+           .container{
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: center;
+                 gap: 20px;
+                 padding: 20px;
+            }
+            body{
+                 margin:0;
+                 font-family:Arial, Helvetica, sans-serif;
+                 background:linear-gradient(to right,#fdfbfb,#ebedee);
+            }
+           .container{
+                   display: flex; 
+                 flex-wrap: wrap;
+                 justify-content: center;
+                  gap: 30px;
+                  padding: 30px;
+            }     
+            .card{
+                 width: 280px;
+                  background: linear-gradient(145deg,#ffffff,#f7f7f7);
+                 border-radius: 20px;
+                 overflow: hidden;
+                   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                   transition: all 0.4s ease;
+                 text-align: center;
+            }
 
-  /* ===== HEADER ===== */
-  header.site-header{
-    background:var(--navy);
-    color:#fff;
-    padding:8px 12px;
-  }
-  .header-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    max-width:1500px;
-    margin:0 auto;
-  }
-  .logo{
-    display:flex;
-    align-items:baseline;
-    gap:2px;
-    padding:6px 8px;
-    border:1px solid transparent;
-    border-radius:4px;
-    flex-shrink:0;
-  }
-  .logo:hover{border-color:#fff;}
-  .logo .mark{
-    font-weight:800;
-    font-size:22px;
-    letter-spacing:-0.5px;
-    color:#fff;
-  }
-  .logo .mark span{color:var(--accent);}
-  .logo .tag{font-size:10px; color:#ccc; margin-left:4px;}
 
-  .deliver{
-    display:flex; flex-direction:column; font-size:12px; padding:6px 8px;
-    border:1px solid transparent; border-radius:4px; cursor:pointer; flex-shrink:0;
-  }
-  .deliver:hover{border-color:#fff;}
-  .deliver b{font-size:13px;}
-  .deliver .muted{color:#ccc;}
+            .card:hover{
+                 transform: translateY(-12px) scale(1.03);
+                  box-shadow: 0 18px 35px rgba(0,0,0,0.3);
+            }
+            .card img{
+                 width:100%;
+                 height:220px;
+                  object-fit:cover;
+                  transition:0.5s;
+            }
 
-  .search-bar{
-    flex:1;
-    display:flex;
-    height:40px;
-    border-radius:4px;
-    overflow:hidden;
-    min-width:120px;
-  }
-  .search-bar select{
-    background:#f3f3f3; border:none; padding:0 8px; font-size:12px; color:#555;
-    border-right:1px solid #cdcdcd; max-width:110px;
-  }
-  .search-bar input{
-    flex:1; border:none; padding:0 10px; font-size:15px; min-width:0;
-  }
-  .search-bar input:focus{outline:2px solid var(--accent); outline-offset:-2px;}
-  .search-bar button{
-    background:var(--accent); border:none; width:45px;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .search-bar button:hover{background:var(--accent-hover);}
+            .card:hover img{
+                 transform:scale(1.1);
+            }
 
-  .header-link{
-    display:flex; flex-direction:column; font-size:12px; padding:6px 10px;
-    border:1px solid transparent; border-radius:4px; white-space:nowrap; flex-shrink:0;
-    background:none; color:#fff;
-  }
-  .header-link:hover{border-color:#fff;}
-  .header-link b{font-size:14px;}
+            .card-content{
+                padding:20px;
+            }
 
-  .cart-link{
-    display:flex; align-items:flex-end; gap:4px; padding:6px 8px;
-    border:1px solid transparent; border-radius:4px; flex-shrink:0; position:relative;
-    background:none; color:#fff;
-  }
-  .cart-link:hover{border-color:#fff;}
-  .cart-count{
-    position:absolute; top:-2px; left:14px;
-    background:var(--accent); color:var(--navy); font-weight:800;
-    font-size:13px; min-width:18px; text-align:center; border-radius:50%; line-height:18px;
-  }
-  .cart-label{font-size:13px; font-weight:700; margin-left:2px;}
+            .card-content h2{
+                 color:#e91e63;
+                   margin:10px 0 5px;
+                  font-size:28px;
+            }
 
-  nav.sub-nav{
-    background:var(--navy-light);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    gap:2px;
-    padding:0 10px;
-    overflow-x:auto;
-    scrollbar-width:none;
-  }
-  nav.sub-nav::-webkit-scrollbar{display:none;}
-  nav.sub-nav button{
-    background:none; border:1px solid transparent; color:#fff; font-size:13px;
-    padding:8px 10px; border-radius:4px; white-space:nowrap;
-  }
-  nav.sub-nav button:hover{border-color:#fff;}
-  nav.sub-nav button.active{background:var(--navy-hover); font-weight:700;}
+            .card-content h3{
+                 color:#555;
+                  margin:5px 0 10px;
+                 font-size:18px;
+            }
 
-  main{max-width:1500px; margin:0 auto; padding:16px 12px 60px;}
+            .card-content p{
+                 color:#777;
+                 line-height:1.6;
+                 font-size:15px;
+            }
+            .button{
+                 display:inline-block;
+                 margin-top:15px;
+                 padding:12px 28px;
+                 background:linear-gradient(45deg,#ff6b81,#ff4757);
+                 color:white;
+                 text-decoration:none;
+                 border-radius:30px;
+                 font-weight:bold;
+                 transition:0.3s;
+            }
 
-  /* ===== HERO ===== */
-  .hero{
-    background:linear-gradient(180deg,#232f3e 0%, #37475a 60%, var(--bg) 100%);
-    margin:-16px -12px 20px;
-    padding:26px 20px 60px;
-    color:#fff;
-    text-align:center;
-  }
-  .hero h1{margin:0 0 6px; font-size:clamp(22px,4vw,34px);}
-  .hero p{margin:0; color:#d8dee7; font-size:14px;}
-  .hero-band{
-    display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:22px;
-  }
-  .hero-card{
-    background:#fff; color:var(--text); border-radius:var(--radius);
-    padding:14px; width:220px; text-align:left; box-shadow:0 2px 5px rgba(0,0,0,.15);
-  }
-  .hero-card h3{margin:0 0 10px; font-size:16px;}
-  .hero-card .thumb{
-    height:110px; border-radius:4px; display:flex; align-items:center; justify-content:center;
-    font-size:46px; margin-bottom:10px;
-  }
-  .hero-card a{font-size:13px; font-weight:600;}
+            .button:hover{
+                 background:linear-gradient(45deg,#ff4757,#e84118);
+                 transform:scale(1.08);
+            }
 
-  /* ===== FILTER BAR ===== */
-  .filter-bar{
-    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:12px 16px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-    margin-bottom:16px;
-  }
-  .filter-bar .result-count{font-size:14px; color:var(--text-secondary);}
-  .filter-bar .spacer{flex:1;}
-  .filter-bar label{font-size:13px; color:var(--text-secondary); margin-right:6px;}
-  .filter-bar select{
-    padding:6px 8px; border-radius:4px; border:1px solid var(--border); font-size:13px;
-  }
 
-  /* ===== PRODUCT GRID ===== */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
-    gap:16px;
-  }
-  .card{
-    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:14px; display:flex; flex-direction:column; transition:box-shadow .15s;
-  }
-  .card:hover{box-shadow:0 4px 14px rgba(0,0,0,.12);}
-  .card .thumb{
-    height:150px; background:#f3f4f6; border-radius:6px; display:flex; align-items:center;
-    justify-content:center; font-size:64px; margin-bottom:10px; cursor:pointer; position:relative;
-  }
-  .badge{
-    position:absolute; top:6px; left:6px; background:var(--price); color:#fff;
-    font-size:10px; font-weight:700; padding:2px 6px; border-radius:3px; text-transform:uppercase;
-  }
-  .card .title{
-    font-size:14px; line-height:1.3; margin:0 0 6px; cursor:pointer; font-weight:500;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-  }
-  .card .title:hover{color:var(--link);}
-  .stars{color:#de7921; font-size:13px; letter-spacing:1px;}
-  .rating-row{display:flex; align-items:center; gap:6px; margin-bottom:6px;}
-  .rating-row .count{font-size:12px; color:var(--link);}
-  .price-row{display:flex; align-items:baseline; gap:6px; margin-bottom:4px;}
-  .price-row .sym{font-size:12px; position:relative; top:-6px;}
-  .price-row .whole{font-size:22px; font-weight:600;}
-  .price-row .cents{font-size:12px; position:relative; top:-6px;}
-  .strike{font-size:12px; color:var(--text-secondary); text-decoration:line-through;}
-  .save{font-size:12px; color:var(--price);}
-  .prime{font-size:11px; color:var(--text-secondary); margin-bottom:8px;}
-  .prime b{color:#00a8e1;}
-  .card .grow{flex:1;}
-  .add-btn{
-    margin-top:8px; background:var(--accent); border:1px solid #d68000; border-radius:20px;
-    padding:8px 10px; font-size:13px; font-weight:600; box-shadow:0 1px 0 rgba(0,0,0,.1);
-  }
-  .add-btn:hover{background:var(--accent-hover);}
-  .stock-low{font-size:12px; color:var(--price); margin-bottom:4px;}
+            header {
+                 background-color:cadetblue;
+                 padding: 20px;
+                 text-align: center;
+            }
+            header button{
+                 padding:10px 22px;
+                 margin-left:10px;
+                 border:none;
+                 border-radius:30px;
+                 background:white;
+                 color:#ff4081;
+                 font-size:16px;
+                 font-weight:bold;
+                 cursor:pointer;
+                 transition:.3s;
+            }
 
-  /* ===== PRODUCT DETAIL ===== */
-  .detail-wrap{
-    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:24px; display:grid; grid-template-columns:1fr 1.3fr 260px; gap:28px;
-  }
-  .detail-img{
-    height:320px; background:#f3f4f6; border-radius:8px; display:flex; align-items:center;
-    justify-content:center; font-size:140px;
-  }
-  .detail-info h1{font-size:22px; margin:0 0 8px;}
-  .detail-info hr{border:none; border-top:1px solid var(--border); margin:14px 0;}
-  .detail-info .feature-list{font-size:14px; line-height:1.7; padding-left:18px;}
-  .buybox{
-    border:1px solid var(--border); border-radius:8px; padding:16px; align-self:start;
-  }
-  .buybox .big-price{font-size:26px; color:var(--text); margin-bottom:4px;}
-  .buybox select{
-    width:100%; padding:8px; border-radius:20px; border:1px solid var(--border); margin:10px 0;
-  }
-  .buybox .buy-btn{
-    width:100%; padding:9px; border-radius:20px; border:1px solid #d68000; background:var(--accent);
-    font-weight:600; font-size:14px; margin-bottom:8px;
-  }
-  .buybox .buy-btn.secondary{background:#f7ca00; border-color:#e0b400;}
-  .buybox .buy-btn:hover{filter:brightness(0.96);}
-  .buybox .ship-info{font-size:12px; color:var(--text-secondary); margin-top:10px; line-height:1.6;}
+            header button:hover{
+                 background:#ff4081;
+                 color:white;
+                 transform:scale(1.05);
+            }
+           
+            nav{
+                 background:#ffffff;
+                 display:flex;
+                 gap:20px;
+                 padding:15px;
+                 box-shadow:0 3px 10px rgba(0,0,0,0.15);
+            }
 
-  /* ===== BREADCRUMB / BACK ===== */
-  .crumb{font-size:13px; margin-bottom:14px; color:var(--text-secondary);}
-  .crumb a{margin-right:4px;}
+            nav a{
+                   color:#ff4081;
+                 text-decoration:none;
+                 font-size:18px;
+                 font-weight:bold;
+                 padding:10px 20px;
+                 border-radius:25px;
+                 transition:0.3s;
+            }
 
-  /* ===== CART PAGE ===== */
-  .cart-layout{display:grid; grid-template-columns:1fr 300px; gap:20px; align-items:start;}
-  .cart-panel{background:var(--card); border-radius:var(--radius); border:1px solid var(--border); padding:20px;}
-  .cart-panel h2{margin-top:0; border-bottom:1px solid var(--border); padding-bottom:12px;}
-  .cart-item{
-    display:grid; grid-template-columns:110px 1fr auto; gap:14px; padding:16px 0; border-bottom:1px solid var(--border);
-  }
-  .cart-item .thumb{
-    height:100px; background:#f3f4f6; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:48px;
-  }
-  .cart-item h4{margin:0 0 6px; font-size:15px;}
-  .cart-item .price{font-weight:700; margin-bottom:8px;}
-  .cart-item .controls{display:flex; align-items:center; gap:10px; font-size:13px;}
-  .qty-box{display:flex; align-items:center; border:1px solid var(--border); border-radius:20px; overflow:hidden;}
-  .qty-box button{border:none; background:#f0f2f2; width:28px; height:28px; font-size:16px;}
-  .qty-box span{width:32px; text-align:center; font-size:13px;}
-  .remove-link{color:var(--link); background:none; border:none; font-size:13px; padding:0;}
-  .cart-item .line-total{font-weight:700; text-align:right;}
-  .subtotal-line{text-align:right; font-size:18px; padding-top:10px;}
-  .summary-box{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px;}
-  .summary-box .total{font-size:20px; font-weight:700; margin:10px 0;}
-  .summary-box .checkout-btn{
-    width:100%; padding:10px; border-radius:20px; border:1px solid #d68000; background:var(--accent);
-    font-weight:600; font-size:14px;
-  }
-  .summary-box .checkout-btn:hover{background:var(--accent-hover);}
-  .empty-state{text-align:center; padding:60px 20px;}
-  .empty-state .big{font-size:60px; margin-bottom:10px;}
+            nav a:hover{
+                 background:#ff4081;
+                 color:white;
+            }
+            section {
+                 padding: 20px;
+            }
+            #home{
+                 background-color: lightblue;
+                 padding: 20px;
+                 min-height: 100vh;
+            }
 
-  /* ===== CHECKOUT ===== */
-  .checkout-layout{display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:start;}
-  .steps{display:flex; gap:8px; margin-bottom:18px; font-size:13px; color:var(--text-secondary);}
-  .steps span.active{color:var(--text); font-weight:700;}
-  .panel{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px;}
-  .panel h3{margin-top:0;}
-  .form-row{display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;}
-  .form-group{flex:1; min-width:140px; display:flex; flex-direction:column;}
-  .form-group label{font-size:12px; font-weight:600; margin-bottom:4px;}
-  .form-group input, .form-group select{
-    padding:9px; border-radius:4px; border:1px solid #888; font-size:14px;
-  }
-  .form-group input:focus, .form-group select:focus{outline:2px solid #007185; border-color:#007185;}
-  .primary-btn{
-    background:var(--accent); border:1px solid #d68000; border-radius:20px; padding:10px 18px;
-    font-weight:600; font-size:14px;
-  }
-  .primary-btn:hover{background:var(--accent-hover);}
-  .primary-btn:disabled{opacity:.6; cursor:not-allowed;}
-  .link-btn{background:none; border:none; color:var(--link); font-size:14px; padding:0;}
-  .pay-methods{display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
-  .pay-method{
-    border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:13px; background:#fff;
-    display:flex; align-items:center; gap:6px;
-  }
-  .pay-method.selected{border-color:var(--link); background:#f0f8ff;}
-  .review-item{display:flex; justify-content:space-between; font-size:14px; padding:6px 0; border-bottom:1px dashed var(--border);}
-  .error-text{color:var(--price); font-size:12px; margin-top:2px; min-height:14px;}
-  .field-invalid{border-color:var(--price) !important;}
+            #about{
+                 background: linear-gradient(135deg,#d4fc79,#96e6a1);
+                 padding:60px 30px;
+                 text-align:center;
+            }
 
-  /* ===== CONFIRMATION ===== */
-  .confirm-wrap{text-align:center; padding:40px 16px; background:var(--card); border-radius:var(--radius); border:1px solid var(--border);}
-  .confirm-wrap .check{font-size:70px; color:var(--success); margin-bottom:10px;}
-  .confirm-wrap h1{margin:0 0 6px;}
-  .confirm-box{
-    max-width:420px; margin:22px auto 0; text-align:left; border:1px solid var(--border); border-radius:8px; padding:16px;
-  }
-  .confirm-box .row{display:flex; justify-content:space-between; font-size:14px; padding:5px 0;}
+            #about h2{
+                 font-size:40px;
+                 color:#2d3436;
+                 margin-bottom:20px;
+            }
 
-  /* ===== TOAST ===== */
-  #toast{
-    position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px);
-    background:var(--navy); color:#fff; padding:12px 20px; border-radius:6px; font-size:14px;
-    opacity:0; pointer-events:none; transition:all .25s; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,.3);
-  }
-  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+            #about p{
+                 font-size:18px;
+                 color:#444;
+            }
 
-  footer{background:var(--navy-light); color:#fff; text-align:center; padding:24px; margin-top:40px; font-size:13px;}
-  footer .foot-links{background:var(--navy); padding:12px; font-size:12px;}
+            .about-container{
+                 display:flex;
+                 justify-content:center;
+                 flex-wrap:wrap;
+                 gap:30px;
+                 margin-top:40px;
+            }
 
-  @media(max-width:900px){
-    .detail-wrap{grid-template-columns:1fr;}
-    .cart-layout, .checkout-layout{grid-template-columns:1fr;}
-  }
-  @media(max-width:640px){
-    .deliver{display:none;}
-    .header-link{display:none;}
-    .cart-label{display:none;}
-    .hero{padding:18px 12px 40px;}
-  }
-</style>
-</head>
-<body>
+            .about-box{
+                 width:300px;
+                 background:white;
+                 border-radius:20px;
+                 padding:25px;
+                 box-shadow:0 10px 25px rgba(0,0,0,.15);
+                 transition:.3s;
+            }
 
-<header class="site-header">
-  <div class="header-row">
-    <a class="logo" onclick="navigate('home')">
-      <span class="mark">Market<span>Haus</span></span>
-    </a>
-    <div class="deliver">
-      <span class="muted">Deliver to</span>
-      <b id="deliverLoc">📍 Chennai 600001</b>
+            .about-box:hover{
+                 transform:translateY(-10px);
+            }
+
+            .about-box ul{
+                 text-align:left;
+                 line-height:2;
+            }
+            #contact{
+                 background:linear-gradient(135deg,#ffeaa7,#fab1a0);
+                 padding:60px 30px;
+            }
+
+            #contact h2{
+                 text-align:center;
+                 font-size:40px;
+                 color:#2d3436;
+                 margin-bottom:40px;
+            }
+
+            .contact-container{
+                 display:flex;
+                 justify-content:center;
+                 gap:40px;
+                 flex-wrap:wrap;
+            }
+
+            .contact-info,
+            .contact-form{
+                 width:400px;
+                 background:white;
+                 padding:30px;
+                 border-radius:20px;
+                 box-shadow:0 10px 20px rgba(0,0,0,.15);
+            }
+
+        .contact-info p{
+                 line-height:1.8;
+                 color:#555;
+            }
+
+        .contact-form input,
+        .contact-form textarea{
+                 width:100%;
+                 padding:12px;
+                 margin:10px 0;
+                 border:1px solid #ccc;
+                 border-radius:10px;
+                 font-size:16px;
+                 box-sizing:border-box;
+            }
+
+        .contact-form button{
+                 width:100%;
+                 padding:12px;
+                 background:#ff4081;
+                 color:white;
+                 border:none;
+                 border-radius:10px;
+                 font-size:18px;
+                 cursor:pointer;
+                 transition:.3s;
+            }
+
+        .contact-form button:hover{
+                 background:#e91e63;
+            }
+         </style>
+    
+    <body>
+        
+        <header>
+        <button onclick="window.location.href='SumiReg.html'">
+             Register
+        </button>
+
+        <button onclick="window.location.href='SumiLog.html'">
+             Login
+        </button>
+
+            <h2>Mika's Flower Shop</h2>
+        </header>
+         
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>  
+            <a href="#contact">Contact</a>
+        </nav>
+        <section id="home">
+            <h2>Home</h2>
+         <p>Welcome to my website!</p>
+
+    <div class="container">
+         <div class="card">
+         <img src="f1.jpg">
+         <div class="card-content">
+            <h3>Indian PaintBrush</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1000</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Indian PaintBrush&price=1000" class="button">Buy Now</a>
+        </div>
     </div>
-    <div class="search-bar">
-      <select id="searchCategory"></select>
-      <input id="searchInput" type="text" placeholder="Search MarketHaus" onkeydown="if(event.key==='Enter')doSearch()">
-      <button onclick="doSearch()" aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
+
+    <div class="card">
+        <img src="f2.jpg">
+        <div class="card-content">
+            <h3>Bluebonnet</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹800</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Bluebonnet&price=800" class="button">Buy Now</a>
+        </div>
     </div>
-    <button class="header-link" onclick="navigate('orders')">
-      <span>Returns</span><b>& Orders</b>
-    </button>
-    <button class="header-link" onclick="navigate('cart')">
-      <span>Your</span><b>Account</b>
-    </button>
-    <button class="cart-link" onclick="navigate('cart')">
-      <span class="cart-count" id="cartCount">0</span>
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M3 3h2l2.6 12.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="21" r="1.2" fill="#fff"/><circle cx="18" cy="21" r="1.2" fill="#fff"/></svg>
-      <span class="cart-label">Cart</span>
-    </button>
-  </div>
-</header>
 
-<nav class="sub-nav" id="categoryNav"></nav>
+    <div class="card">
+        <img src="f3.jpg">
+        <div class="card-content">
+            <h3>Wild Bergamot</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1600</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Wild Bergamot&price=1600" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f4.jpg">
+        <div class="card-content">
+            <h3>Cut Flowers</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1200</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Cut Flowers&price=1200" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f5.jpg">
+        <div class="card-content">
+            <h3>Dalia</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1400</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Dalia&price=1400" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f6.jpg">
+        <div class="card-content">
+            <h3>Zinnia</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1100</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Zinnia&price=1100" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f7.jpg">
+        <div class="card-content">
+            <h3>Ranunculus</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1300</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Ranunculus" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f8.jpg">
+        <div class="card-content">
+            <h3>Anemone</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1500</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Anemone&price=1500" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f9.jpg">
+        <div class="card-content">
+            <h3>Amarnth</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹900</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Amarnth&price=900" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f10.jpg">
+        <div class="card-content">
+            <h3>Chrysanthemum</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1700</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Chrysanthemum&price=1700" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f11.jpg">
+        <div class="card-content">
+            <h3>Celosia</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1800</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Celosia&price=1800" class="button">Buy Now</a>
+        </div>
+    </div>
+      <div class="card">
+        <img src="f12.jpg">
+        <div class="card-content">
+            <h3>Larkspur</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹1900</h3>   
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Larkspur&price=1900" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f13.jpg">
+        <div class="card-content">
+            <h3>Peony</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2000</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Peony&price=2000" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f14.jpg">
+        <div class="card-content">
+            <h3>Gladiolus</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2100</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Gladiolus&price=2100" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f15.jpg">
+        <div class="card-content">
+            <h3>Craspedia</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2200</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Craspedia&price=2200" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f16.jpg">
+        <div class="card-content">
+            <h3>Gomphrena</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2300</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Gomphrena&price=2300" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f17.jpg">
+        <div class="card-content">
+            <h3>Gerbera Daisy</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2400</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Gerbera Daisy&price=2400" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f18.jpeg">
+        <div class="card-content">
+            <h3>Snapdragon</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2500</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Snapdragon&price=2500" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f19.jpg">
+        <div class="card-content">
+            <h3>Bells of Ireland</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2600</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Bells of Ireland&price=2600" class="button">Buy Now</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="f20.jpg">
+        <div class="card-content">
+            <h3>Strawflower</h3>
+            <h3>Beautiful Blooms</h3>
+            <h3>Price: ₹2700</h3>
+            <p>Card description goes here.</p>
+            <a href="buy.html?flower=Strawflower&price=2700" class="button">Buy Now</a>
+        </div>
+    </div>
+    </div>
+</section>
 
-<main id="app"></main>
+<section id="about">
+    
+    <h2>🌸 About Us</h2>
 
+    <p>
+        Welcome to <strong>Flower Paradise</strong>, where every flower tells a story.
+        We provide fresh, beautiful, and handcrafted flower bouquets for every occasion.
+    </p>
+
+    <div class="about-container">
+
+        <div class="about-box">
+            <h3>🌹 Our Mission</h3>
+            <p>
+                To spread happiness through fresh flowers and provide
+                high-quality floral arrangements at affordable prices.
+            </p>
+        </div>
+
+        <div class="about-box">
+            <h3>💐 Why Choose Us?</h3>
+            <ul>
+                <li>Fresh flowers every day</li>
+                <li>Affordable prices</li>
+                <li>Custom bouquets</li>
+                <li>Fast delivery</li>
+                <li>Friendly customer service</li>
+            </ul>
+        </div>
+
+        <div class="about-box">
+            <h3>📞 Contact</h3>
+            <p>Email: flowershoppyy@gmail.com</p>
+            <p>Phone: +91 8056535275</p>
+            <p>Open: Monday - Sunday</p>
+            <p>9:00 AM - 8:00 PM</p>
+        </div>
+
+    </div>
+</section>
+</section>
+
+<section id="contact">
+    <h2>📞 Contact Us</h2>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+            <h3>Get in Touch</h3>
+
+            <p><strong>📍 Address:</strong><br>
+            123 Flower Street,<br>
+            Chennai, Tamil Nadu</p>
+
+            <p><strong>📞 Phone:</strong><br>
+            +91 8056535275</p>
+
+            <p><strong>📧 Email:</strong><br>
+            flowershop@gmail.com</p>
+
+            <p><strong>🕒 Working Hours:</strong><br>
+            Monday - Sunday<br>
+            9:00 AM - 8:00 PM</p>
+        </div>
+
+        <div class="contact-form">
+            <h3>Send Us a Message</h3>
+
+            <form>
+                <input type="text" placeholder="Your Name" required>
+
+                <input type="email" placeholder="Your Email" required>
+
+                <textarea placeholder="Your Message" rows="5"></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
 <footer>
-  <div>Back to top</div>
-  <div class="foot-links">MarketHaus — a demo storefront. Not affiliated with any retailer. Built for demonstration purposes only.</div>
+    <p>© 2026 Flower Shop | Designed by Sumila 🌸</p>
 </footer>
 
-<div id="toast"></div>
-
-<script>
-/* =========================================================
-   DATA
-   ========================================================= */
-const CATEGORIES = ["Electronics","Fashion","Home & Kitchen","Books","Toys & Games","Beauty & Health","Sports & Outdoors"];
-
-const PRODUCTS = [
-  {id:1,title:"Wireless Noise-Cancelling Headphones, Over-Ear Bluetooth 5.3, 40Hr Battery",category:"Electronics",price:59.99,original:89.99,rating:4.5,reviews:12480,icon:"🎧",badge:"Best Seller",stock:23,desc:"Immerse yourself in rich sound with active noise cancellation, plush memory-foam ear cups, and up to 40 hours of playback on a single charge. Includes carrying case and USB-C fast charging."},
-  {id:2,title:"4K Ultra HD Smart TV 55-inch with Voice Remote",category:"Electronics",price:429.00,original:549.00,rating:4.6,reviews:8341,icon:"📺",badge:"Deal",stock:11,desc:"Crisp 4K resolution, HDR10 support, and a built-in streaming hub. Voice remote makes finding your next show effortless."},
-  {id:3,title:"Mechanical Gaming Keyboard, RGB Backlit, Hot-Swappable Switches",category:"Electronics",price:44.99,original:64.99,rating:4.4,reviews:5602,icon:"⌨️",badge:null,stock:47,desc:"Tactile hot-swappable switches, per-key RGB lighting, and a durable aluminum frame built for marathon gaming sessions."},
-  {id:4,title:"Portable Bluetooth Speaker, Waterproof IPX7, 20W",category:"Electronics",price:29.99,original:39.99,rating:4.3,reviews:9871,icon:"🔊",badge:null,stock:60,desc:"Take your music anywhere with a rugged, waterproof design and a punchy 20W driver that fills any room or campsite."},
-  {id:5,title:"Slim Fit Cotton Oxford Shirt, Long Sleeve",category:"Fashion",price:22.50,original:32.00,rating:4.2,reviews:2140,icon:"👔",badge:null,stock:80,desc:"Breathable 100% cotton oxford cloth with a tailored slim fit. Machine washable and wrinkle-resistant."},
-  {id:6,title:"Running Shoes, Lightweight Breathable Mesh",category:"Fashion",price:38.00,original:55.00,rating:4.5,reviews:6740,icon:"👟",badge:"Deal",stock:34,desc:"Engineered mesh upper for breathability, cushioned midsole for shock absorption, and a durable rubber outsole for any terrain."},
-  {id:7,title:"Classic Leather Belt, Reversible Buckle",category:"Fashion",price:18.99,original:24.99,rating:4.1,reviews:1230,icon:"👜",badge:null,stock:55,desc:"Genuine leather belt with a reversible buckle for two looks in one. Fits waist sizes 30-44."},
-  {id:8,title:"Polarized Aviator Sunglasses, UV400 Protection",category:"Fashion",price:15.99,original:25.99,rating:4.3,reviews:3320,icon:"🕶️",badge:null,stock:70,desc:"Classic aviator styling with polarized lenses that cut glare and block 100% of UVA/UVB rays."},
-  {id:9,title:"Stainless Steel 12-Piece Cookware Set",category:"Home & Kitchen",price:129.99,original:189.99,rating:4.7,reviews:4410,icon:"🍳",badge:"Best Seller",stock:18,desc:"Tri-ply stainless steel construction for even heating. Includes pots, pans, and lids to outfit a full kitchen."},
-  {id:10,title:"Robot Vacuum Cleaner with Smart Mapping",category:"Home & Kitchen",price:189.00,original:259.00,rating:4.4,reviews:7650,icon:"🤖",badge:"Deal",stock:15,desc:"Laser-guided smart mapping navigates your home efficiently, with app control and automatic recharging."},
-  {id:11,title:"Memory Foam Pillow, Cervical Support, 2-Pack",category:"Home & Kitchen",price:34.99,original:49.99,rating:4.6,reviews:5230,icon:"🛏️",badge:null,stock:40,desc:"Contoured memory foam cradles your neck and shoulders for better spinal alignment and deeper sleep."},
-  {id:12,title:"Digital Air Fryer, 6-Quart, 8 Presets",category:"Home & Kitchen",price:69.99,original:99.99,rating:4.5,reviews:11200,icon:"🍟",badge:"Best Seller",stock:29,desc:"Crisp your favorite foods with little to no oil. Eight one-touch presets and a nonstick, dishwasher-safe basket."},
-  {id:13,title:"The Silent Orchard — A Novel",category:"Books",price:12.99,original:17.99,rating:4.8,reviews:3140,icon:"📕",badge:null,stock:90,desc:"A sweeping multi-generational story about a family orchard and the secrets buried beneath its roots. A book club favorite."},
-  {id:14,title:"Atlas of Modern Cooking, Hardcover Edition",category:"Books",price:24.99,original:34.99,rating:4.7,reviews:2050,icon:"📗",badge:null,stock:45,desc:"Over 300 recipes spanning six continents, with step-by-step photography and technique guides for home cooks."},
-  {id:15,title:"Learn Python in 30 Days, Beginner to Advanced",category:"Books",price:19.99,original:27.99,rating:4.5,reviews:8900,icon:"📘",badge:"Best Seller",stock:65,desc:"A hands-on guide covering fundamentals through advanced topics, with real projects to build your portfolio."},
-  {id:16,title:"Mindful Mornings — A 90-Day Journal",category:"Books",price:11.49,original:15.99,rating:4.6,reviews:1870,icon:"📓",badge:null,stock:100,desc:"Guided prompts and reflection space to build a calmer, more intentional start to your day."},
-  {id:17,title:"Building Blocks Creative Set, 1000 Pieces",category:"Toys & Games",price:27.99,original:39.99,rating:4.7,reviews:6300,icon:"🧱",badge:null,stock:38,desc:"Compatible with major brick systems. Sparks imagination with endless build possibilities for ages 6+."},
-  {id:18,title:"Remote Control Stunt Car, All-Terrain",category:"Toys & Games",price:34.99,original:49.99,rating:4.3,reviews:2410,icon:"🚗",badge:"Deal",stock:25,desc:"360-degree flips, all-terrain tires, and a rechargeable battery for up to 40 minutes of play."},
-  {id:19,title:"Strategy Board Game, Family Night Edition",category:"Toys & Games",price:29.99,original:39.99,rating:4.8,reviews:5100,icon:"🎲",badge:"Best Seller",stock:33,desc:"Quick to learn, deep to master. A perfect game night pick for 2-6 players ages 10 and up."},
-  {id:20,title:"Plush Stuffed Bear, Super Soft 16-inch",category:"Toys & Games",price:14.99,original:19.99,rating:4.9,reviews:4020,icon:"🧸",badge:null,stock:75,desc:"Ultra-soft huggable plush, machine washable, and safe for all ages."},
-  {id:21,title:"Vitamin C Serum with Hyaluronic Acid, 1oz",category:"Beauty & Health",price:16.99,original:24.99,rating:4.4,reviews:9430,icon:"🧴",badge:"Deal",stock:58,desc:"Brightens and hydrates with a lightweight, fast-absorbing formula suitable for daily use."},
-  {id:22,title:"Electric Toothbrush, 5 Modes, Rechargeable",category:"Beauty & Health",price:24.99,original:34.99,rating:4.6,reviews:6789,icon:"🪥",badge:null,stock:42,desc:"Dentist-recommended sonic cleaning with a 2-minute smart timer and long-lasting battery."},
-  {id:23,title:"Adjustable Dumbbell Set, 5-25 lbs",category:"Sports & Outdoors",price:89.99,original:129.99,rating:4.5,reviews:3120,icon:"🏋️",badge:"Best Seller",stock:20,desc:"Space-saving adjustable dumbbells that replace an entire rack, with a quick-turn dial system."},
-  {id:24,title:"Insulated Water Bottle, 32oz, Keeps Cold 24hrs",category:"Sports & Outdoors",price:19.99,original:27.99,rating:4.7,reviews:10500,icon:"🍶",badge:null,stock:88,desc:"Double-wall vacuum insulation keeps drinks cold for 24 hours or hot for 12. Leak-proof lid included."},
-];
-
-/* =========================================================
-   STATE (in-memory only)
-   ========================================================= */
-const state = {
-  view: "home",
-  productId: null,
-  cart: {},              // {productId: qty}
-  searchQuery: "",
-  searchCategory: "All",
-  sortBy: "featured",
-  checkoutStep: 1,
-  shipping: {name:"",address:"",city:"",state:"",zip:"",phone:""},
-  payment: {method:"card", cardName:"", cardNumber:"", expiry:"", cvv:""},
-  lastOrder: null,
-};
-
-const $ = sel => document.querySelector(sel);
-const app = $("#app");
-
-function fmt(n){ return n.toFixed(2); }
-function starString(rating){
-  const full = Math.round(rating*2)/2;
-  let s="";
-  for(let i=1;i<=5;i++){
-    if(full>=i) s+="★"; else if(full>=i-0.5) s+="★"; else s+="☆";
-  }
-  return s;
-}
-function cartCount(){
-  return Object.values(state.cart).reduce((a,b)=>a+b,0);
-}
-function cartItems(){
-  return Object.entries(state.cart).map(([id,qty])=>{
-    const p = PRODUCTS.find(p=>p.id===Number(id));
-    return {...p, qty};
-  });
-}
-function cartSubtotal(){
-  return cartItems().reduce((sum,i)=>sum+i.price*i.qty,0);
-}
-function showToast(msg){
-  const t = $("#toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>t.classList.remove("show"), 2200);
-}
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-function navigate(view, params={}){
-  state.view = view;
-  Object.assign(state, params);
-  window.scrollTo({top:0, behavior:"smooth"});
-  render();
-}
-function addToCart(id, qty=1){
-  state.cart[id] = (state.cart[id]||0) + qty;
-  updateCartBadge();
-  const p = PRODUCTS.find(p=>p.id===id);
-  showToast(`Added "${p.title.slice(0,40)}${p.title.length>40?'…':''}" to cart`);
-}
-function setQty(id, qty){
-  if(qty<=0){ delete state.cart[id]; }
-  else state.cart[id]=qty;
-  updateCartBadge();
-  render();
-}
-function removeFromCart(id){
-  delete state.cart[id];
-  updateCartBadge();
-  render();
-  showToast("Item removed from cart");
-}
-function updateCartBadge(){
-  $("#cartCount").textContent = cartCount();
-}
-function doSearch(){
-  state.searchQuery = $("#searchInput").value.trim();
-  const catSel = $("#searchCategory").value;
-  state.searchCategory = catSel;
-  navigate("home");
-}
-
-/* =========================================================
-   RENDER: HEADER NAV / CATEGORY BAR
-   ========================================================= */
-function renderStaticChrome(){
-  const catSelect = $("#searchCategory");
-  catSelect.innerHTML = `<option value="All">All</option>` + CATEGORIES.map(c=>`<option value="${c}">${c}</option>`).join("");
-
-  const navEl = $("#categoryNav");
-  navEl.innerHTML = ["All", ...CATEGORIES].map(c=>
-    `<button class="${state.searchCategory===c && state.view==='home' ? 'active':''}" onclick="filterCategory('${c.replace(/'/g,"\\'")}')">${c}</button>`
-  ).join("");
-}
-function filterCategory(cat){
-  state.searchCategory = cat;
-  state.searchQuery = "";
-  $("#searchInput").value = "";
-  navigate("home");
-}
-
-/* =========================================================
-   RENDER: HOME
-   ========================================================= */
-function renderHome(){
-  let list = PRODUCTS.slice();
-  if(state.searchCategory && state.searchCategory!=="All"){
-    list = list.filter(p=>p.category===state.searchCategory);
-  }
-  if(state.searchQuery){
-    const q = state.searchQuery.toLowerCase();
-    list = list.filter(p=>p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-  }
-  if(state.sortBy==="price-asc") list.sort((a,b)=>a.price-b.price);
-  else if(state.sortBy==="price-desc") list.sort((a,b)=>b.price-a.price);
-  else if(state.sortBy==="rating") list.sort((a,b)=>b.rating-a.rating);
-
-  const heroSection = (!state.searchQuery && state.searchCategory==="All") ? `
-    <div class="hero">
-      <h1>Everything you need, delivered fast.</h1>
-      <p>Explore today's top picks across every category.</p>
-      <div class="hero-band">
-        ${["Electronics","Fashion","Home & Kitchen","Toys & Games"].map(c=>{
-          const p = PRODUCTS.find(p=>p.category===c);
-          return `<div class="hero-card">
-            <h3>${c}</h3>
-            <div class="thumb" style="background:#f3f4f6">${p.icon}</div>
-            <a onclick="filterCategory('${c.replace(/'/g,"\\'")}')">Shop now ›</a>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>` : "";
-
-  const heading = state.searchQuery
-    ? `Results for "${escapeHtml(state.searchQuery)}"`
-    : (state.searchCategory==="All" ? "Today's Deals & Top Picks" : state.searchCategory);
-
-  app.innerHTML = `
-    ${heroSection}
-    <div class="filter-bar">
-      <span class="result-count"><strong>${heading}</strong> — ${list.length} result${list.length!==1?"s":""}</span>
-      <div class="spacer"></div>
-      <label for="sortSel">Sort by</label>
-      <select id="sortSel" onchange="setSort(this.value)">
-        <option value="featured" ${state.sortBy==="featured"?"selected":""}>Featured</option>
-        <option value="price-asc" ${state.sortBy==="price-asc"?"selected":""}>Price: Low to High</option>
-        <option value="price-desc" ${state.sortBy==="price-desc"?"selected":""}>Price: High to Low</option>
-        <option value="rating" ${state.sortBy==="rating"?"selected":""}>Avg. Customer Rating</option>
-      </select>
-    </div>
-    ${list.length===0 ? `<div class="empty-state"><div class="big">🔍</div><h2>No results found</h2><p>Try a different search term or browse a category above.</p></div>` : `
-    <div class="grid">
-      ${list.map(productCard).join("")}
-    </div>`}
-  `;
-}
-function setSort(val){ state.sortBy = val; renderHome(); }
-
-function productCard(p){
-  const pct = Math.round((1 - p.price/p.original)*100);
-  return `
-    <div class="card">
-      ${p.badge ? `<div style="position:relative">` : ""}
-      <div class="thumb" onclick="navigate('detail',{productId:${p.id}})">
-        ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
-        ${p.icon}
-      </div>
-      ${p.badge ? `</div>` : ""}
-      <div class="title" onclick="navigate('detail',{productId:${p.id}})">${escapeHtml(p.title)}</div>
-      <div class="rating-row">
-        <span class="stars">${starString(p.rating)}</span>
-        <span class="count">${p.reviews.toLocaleString()}</span>
-      </div>
-      <div class="price-row">
-        <span class="sym">$</span><span class="whole">${Math.floor(p.price)}</span><span class="cents">${(p.price%1).toFixed(2).slice(2)}</span>
-      </div>
-      <div>
-        <span class="strike">$${fmt(p.original)}</span>
-        <span class="save">-${pct}%</span>
-      </div>
-      <div class="prime">✓ <b>FREE</b> delivery • In stock</div>
-      ${p.stock<20 ? `<div class="stock-low">Only ${p.stock} left in stock</div>` : ""}
-      <div class="grow"></div>
-      <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
-    </div>
-  `;
-}
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-}
-
-/* =========================================================
-   RENDER: PRODUCT DETAIL
-   ========================================================= */
-function renderDetail(){
-  const p = PRODUCTS.find(p=>p.id===state.productId);
-  if(!p){ navigate("home"); return; }
-  app.innerHTML = `
-    <div class="crumb"><a onclick="navigate('home')">Home</a> › <a onclick="filterCategory('${p.category.replace(/'/g,"\\'")}')">${p.category}</a> › <span>${escapeHtml(p.title.slice(0,30))}</span></div>
-    <div class="detail-wrap">
-      <div class="detail-img">${p.icon}</div>
-      <div class="detail-info">
-        <h1>${escapeHtml(p.title)}</h1>
-        <div class="rating-row">
-          <span class="stars">${starString(p.rating)}</span>
-          <span class="count">${p.reviews.toLocaleString()} ratings</span>
-        </div>
-        <hr>
-        <div class="price-row">
-          <span class="sym">$</span><span class="whole">${Math.floor(p.price)}</span><span class="cents">${(p.price%1).toFixed(2).slice(2)}</span>
-        </div>
-        <div><span class="strike">List: $${fmt(p.original)}</span></div>
-        <hr>
-        <p style="font-size:14px; line-height:1.6;">${escapeHtml(p.desc)}</p>
-        <ul class="feature-list">
-          <li>Category: ${p.category}</li>
-          <li>Free returns within 30 days</li>
-          <li>Ships from and sold by MarketHaus</li>
-        </ul>
-      </div>
-      <div class="buybox">
-        <div class="big-price">$${fmt(p.price)}</div>
-        <div class="prime">✓ <b>FREE</b> delivery <strong>Tomorrow</strong></div>
-        <div style="font-size:13px; color:var(--success); font-weight:600; margin-top:8px;">In Stock</div>
-        <label style="font-size:12px;">Quantity</label>
-        <select id="qtySelect">
-          ${Array.from({length:Math.min(10,p.stock)},(_,i)=>i+1).map(n=>`<option value="${n}">${n}</option>`).join("")}
-        </select>
-        <button class="buy-btn" onclick="addToCart(${p.id}, Number($('#qtySelect').value)); ">Add to Cart</button>
-        <button class="buy-btn secondary" onclick="addToCart(${p.id}, Number($('#qtySelect').value)); navigate('cart')">Buy Now</button>
-        <div class="ship-info">
-          Ships to: 📍 Chennai 600001<br>
-          Sold by: MarketHaus Retail<br>
-          🔒 Secure transaction
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* =========================================================
-   RENDER: CART
-   ========================================================= */
-function renderCart(){
-  const items = cartItems();
-  if(items.length===0){
-    app.innerHTML = `
-      <div class="empty-state">
-        <div class="big">🛒</div>
-        <h2>Your cart is empty</h2>
-        <p>Looks like you haven't added anything yet.</p>
-        <button class="primary-btn" onclick="navigate('home')">Continue Shopping</button>
-      </div>`;
-    return;
-  }
-  const subtotal = cartSubtotal();
-  app.innerHTML = `
-    <div class="cart-layout">
-      <div class="cart-panel">
-        <h2>Shopping Cart</h2>
-        ${items.map(i=>`
-          <div class="cart-item">
-            <div class="thumb">${i.icon}</div>
-            <div>
-              <h4 onclick="navigate('detail',{productId:${i.id}})" style="cursor:pointer">${escapeHtml(i.title)}</h4>
-              <div class="price">$${fmt(i.price)}</div>
-              <div class="controls">
-                <div class="qty-box">
-                  <button onclick="setQty(${i.id}, ${i.qty-1})" aria-label="Decrease quantity">−</button>
-                  <span>${i.qty}</span>
-                  <button onclick="setQty(${i.id}, ${i.qty+1})" aria-label="Increase quantity">+</button>
-                </div>
-                <button class="remove-link" onclick="removeFromCart(${i.id})">Delete</button>
-              </div>
-            </div>
-            <div class="line-total">$${fmt(i.price*i.qty)}</div>
-          </div>
-        `).join("")}
-        <div class="subtotal-line">Subtotal (${cartCount()} items): <strong>$${fmt(subtotal)}</strong></div>
-      </div>
-      <div class="summary-box">
-        <div>Subtotal (${cartCount()} items)</div>
-        <div class="total">$${fmt(subtotal)}</div>
-        <button class="checkout-btn" onclick="navigate('checkout',{checkoutStep:1})">Proceed to Checkout</button>
-      </div>
-    </div>
-  `;
-}
-
-/* =========================================================
-   RENDER: CHECKOUT
-   ========================================================= */
-function renderCheckout(){
-  const items = cartItems();
-  if(items.length===0){ navigate("home"); return; }
-  const subtotal = cartSubtotal();
-  const shippingFee = subtotal>50 ? 0 : 5.99;
-  const tax = subtotal*0.08;
-  const total = subtotal+shippingFee+tax;
-
-  const stepsHtml = `
-    <div class="steps">
-      <span class="${state.checkoutStep>=1?'active':''}">1. Shipping</span> ›
-      <span class="${state.checkoutStep>=2?'active':''}">2. Payment</span> ›
-      <span class="${state.checkoutStep>=3?'active':''}">3. Review</span>
-    </div>`;
-
-  let stepBody = "";
-  if(state.checkoutStep===1){
-    const s = state.shipping;
-    stepBody = `
-      <div class="panel">
-        <h3>Shipping Address</h3>
-        <div class="form-row">
-          <div class="form-group"><label>Full name</label><input id="f_name" value="${escapeHtml(s.name)}"></div>
-          <div class="form-group"><label>Phone</label><input id="f_phone" value="${escapeHtml(s.phone)}"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group" style="flex:2"><label>Street address</label><input id="f_address" value="${escapeHtml(s.address)}"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>City</label><input id="f_city" value="${escapeHtml(s.city)}"></div>
-          <div class="form-group"><label>State</label><input id="f_state" value="${escapeHtml(s.state)}"></div>
-          <div class="form-group"><label>PIN / ZIP code</label><input id="f_zip" value="${escapeHtml(s.zip)}"></div>
-        </div>
-        <div class="error-text" id="shipError"></div>
-        <button class="primary-btn" onclick="submitShipping()">Deliver to this address ›</button>
-      </div>`;
-  } else if(state.checkoutStep===2){
-    const pay = state.payment;
-    stepBody = `
-      <div class="panel">
-        <h3>Payment Method</h3>
-        <div class="pay-methods">
-          <button class="pay-method ${pay.method==='card'?'selected':''}" onclick="setPayMethod('card')">💳 Credit / Debit Card</button>
-          <button class="pay-method ${pay.method==='upi'?'selected':''}" onclick="setPayMethod('upi')">📱 UPI</button>
-          <button class="pay-method ${pay.method==='cod'?'selected':''}" onclick="setPayMethod('cod')">💵 Cash on Delivery</button>
-        </div>
-        <div id="payFields"></div>
-        <div class="error-text" id="payError"></div>
-        <button class="primary-btn" onclick="submitPayment()">Continue to Review ›</button>
-        <button class="link-btn" style="margin-left:10px;" onclick="navigate('checkout',{checkoutStep:1})">‹ Back to shipping</button>
-      </div>`;
-  } else {
-    const s = state.shipping;
-    stepBody = `
-      <div class="panel">
-        <h3>Review Your Order</h3>
-        <p style="font-size:14px;"><strong>Shipping to:</strong> ${escapeHtml(s.name)}, ${escapeHtml(s.address)}, ${escapeHtml(s.city)}, ${escapeHtml(s.state)} ${escapeHtml(s.zip)}</p>
-        <p style="font-size:14px;"><strong>Payment:</strong> ${paymentLabel()}</p>
-        <hr style="border:none;border-top:1px solid var(--border)">
-        ${items.map(i=>`
-          <div class="review-item">
-            <span>${i.icon} ${escapeHtml(i.title.slice(0,50))} × ${i.qty}</span>
-            <span>$${fmt(i.price*i.qty)}</span>
-          </div>
-        `).join("")}
-        <button class="primary-btn" style="margin-top:16px;" onclick="placeOrder()">Place your order</button>
-        <button class="link-btn" style="margin-left:10px;" onclick="navigate('checkout',{checkoutStep:2})">‹ Back to payment</button>
-      </div>`;
-  }
-
-  app.innerHTML = `
-    ${stepsHtml}
-    <div class="checkout-layout">
-      <div>${stepBody}</div>
-      <div class="summary-box">
-        <h3 style="margin-top:0">Order Summary</h3>
-        <div class="review-item"><span>Items (${cartCount()})</span><span>$${fmt(subtotal)}</span></div>
-        <div class="review-item"><span>Shipping</span><span>${shippingFee===0?"FREE":"$"+fmt(shippingFee)}</span></div>
-        <div class="review-item"><span>Tax</span><span>$${fmt(tax)}</span></div>
-        <div class="total">Order total: $${fmt(total)}</div>
-      </div>
-    </div>
-  `;
-
-  if(state.checkoutStep===2) renderPayFields();
-}
-
-function paymentLabel(){
-  const m = state.payment.method;
-  if(m==='card') return `Card ending in ${state.payment.cardNumber.slice(-4)}`;
-  if(m==='upi') return `UPI`;
-  return `Cash on Delivery`;
-}
-function setPayMethod(m){
-  state.payment.method = m;
-  renderCheckout();
-}
-function renderPayFields(){
-  const el = $("#payFields");
-  const pay = state.payment;
-  if(pay.method==='card'){
-    el.innerHTML = `
-      <div class="form-row">
-        <div class="form-group" style="flex:2"><label>Name on card</label><input id="p_name" value="${escapeHtml(pay.cardName)}"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group" style="flex:2"><label>Card number</label><input id="p_number" maxlength="19" placeholder="1234 5678 9012 3456" value="${escapeHtml(pay.cardNumber)}" oninput="formatCardNumber(this)"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Expiry (MM/YY)</label><input id="p_expiry" maxlength="5" placeholder="MM/YY" value="${escapeHtml(pay.expiry)}" oninput="formatExpiry(this)"></div>
-        <div class="form-group"><label>CVV</label><input id="p_cvv" maxlength="4" type="password" value="${escapeHtml(pay.cvv)}"></div>
-      </div>`;
-  } else if(pay.method==='upi'){
-    el.innerHTML = `
-      <div class="form-row">
-        <div class="form-group" style="flex:2"><label>UPI ID</label><input id="p_upi" placeholder="name@bank" value="${escapeHtml(pay.upi||'')}"></div>
-      </div>`;
-  } else {
-    el.innerHTML = `<p style="font-size:13px; color:var(--text-secondary)">Pay in cash when your order is delivered. A small COD fee may apply.</p>`;
-  }
-}
-function formatCardNumber(input){
-  let v = input.value.replace(/\D/g,"").slice(0,16);
-  input.value = v.replace(/(.{4})/g,"$1 ").trim();
-}
-function formatExpiry(input){
-  let v = input.value.replace(/\D/g,"").slice(0,4);
-  if(v.length>=3) v = v.slice(0,2)+"/"+v.slice(2);
-  input.value = v;
-}
-
-function submitShipping(){
-  const s = {
-    name: $("#f_name").value.trim(),
-    phone: $("#f_phone").value.trim(),
-    address: $("#f_address").value.trim(),
-    city: $("#f_city").value.trim(),
-    state: $("#f_state").value.trim(),
-    zip: $("#f_zip").value.trim(),
-  };
-  if(!s.name || !s.address || !s.city || !s.state || !s.zip || !s.phone){
-    $("#shipError").textContent = "Please fill in all fields to continue.";
-    return;
-  }
-  if(!/^\d{6}$/.test(s.zip) && !/^\d{5}(-\d{4})?$/.test(s.zip)){
-    $("#shipError").textContent = "Please enter a valid PIN/ZIP code.";
-    return;
-  }
-  state.shipping = s;
-  navigate("checkout",{checkoutStep:2});
-}
-
-function submitPayment(){
-  const pay = state.payment;
-  if(pay.method==='card'){
-    const cardName = $("#p_name").value.trim();
-    const cardNumber = $("#p_number").value.replace(/\s/g,"");
-    const expiry = $("#p_expiry").value.trim();
-    const cvv = $("#p_cvv").value.trim();
-    if(!cardName || cardNumber.length<15 || !/^\d{2}\/\d{2}$/.test(expiry) || cvv.length<3){
-      $("#payError").textContent = "Please enter valid card details.";
-      return;
-    }
-    Object.assign(state.payment,{cardName,cardNumber,expiry,cvv});
-  } else if(pay.method==='upi'){
-    const upi = $("#p_upi").value.trim();
-    if(!upi.includes("@")){
-      $("#payError").textContent = "Please enter a valid UPI ID (e.g. name@bank).";
-      return;
-    }
-    state.payment.upi = upi;
-  }
-  navigate("checkout",{checkoutStep:3});
-}
-
-function placeOrder(){
-  const items = cartItems();
-  const subtotal = cartSubtotal();
-  const shippingFee = subtotal>50 ? 0 : 5.99;
-  const tax = subtotal*0.08;
-  const total = subtotal+shippingFee+tax;
-  const orderId = "MH-" + Math.floor(100000000 + Math.random()*899999999);
-  const deliveryDate = new Date(Date.now() + 3*24*60*60*1000);
-
-  state.lastOrder = {
-    orderId, items, total,
-    deliveryDate: deliveryDate.toDateString(),
-    shipping: {...state.shipping},
-    method: paymentLabel(),
-  };
-  state.cart = {};
-  updateCartBadge();
-  navigate("confirmation");
-}
-
-/* =========================================================
-   RENDER: CONFIRMATION
-   ========================================================= */
-function renderConfirmation(){
-  const o = state.lastOrder;
-  if(!o){ navigate("home"); return; }
-  app.innerHTML = `
-    <div class="confirm-wrap">
-      <div class="check">✅</div>
-      <h1>Order placed, thank you!</h1>
-      <p style="color:var(--text-secondary)">Confirmation email would be sent for order <strong>${o.orderId}</strong></p>
-      <div class="confirm-box">
-        <div class="row"><span>Order ID</span><span>${o.orderId}</span></div>
-        <div class="row"><span>Estimated delivery</span><span>${o.deliveryDate}</span></div>
-        <div class="row"><span>Ship to</span><span>${escapeHtml(o.shipping.name)}, ${escapeHtml(o.shipping.city)}</span></div>
-        <div class="row"><span>Payment</span><span>${o.method}</span></div>
-        <div class="row"><span><strong>Order total</strong></span><span><strong>$${fmt(o.total)}</strong></span></div>
-      </div>
-      <button class="primary-btn" style="margin-top:22px;" onclick="navigate('home')">Continue Shopping</button>
-    </div>
-  `;
-}
-
-/* =========================================================
-   RENDER: ORDERS (placeholder page)
-   ========================================================= */
-function renderOrders(){
-  const o = state.lastOrder;
-  app.innerHTML = `
-    <h2>Your Orders</h2>
-    ${o ? `
-      <div class="panel">
-        <div class="review-item"><span>Order ${o.orderId}</span><span>$${fmt(o.total)}</span></div>
-        <div style="font-size:13px;color:var(--text-secondary)">Arriving ${o.deliveryDate}</div>
-      </div>
-    ` : `<div class="empty-state"><div class="big">📦</div><h2>No orders yet</h2><p>Orders you place will appear here.</p><button class="primary-btn" onclick="navigate('home')">Start Shopping</button></div>`}
-  `;
-}
-
-/* =========================================================
-   MAIN RENDER DISPATCH
-   ========================================================= */
-function render(){
-  renderStaticChrome();
-  updateCartBadge();
-  if(state.view==="home") renderHome();
-  else if(state.view==="detail") renderDetail();
-  else if(state.view==="cart") renderCart();
-  else if(state.view==="checkout") renderCheckout();
-  else if(state.view==="confirmation") renderConfirmation();
-  else if(state.view==="orders") renderOrders();
-}
-
-render();
-</script>
 </body>
 </html>
