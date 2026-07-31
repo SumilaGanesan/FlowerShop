@@ -95,6 +95,12 @@
                  transform:scale(1.08);
             }
 
+            .add-cart-btn{
+                 border:none;
+                 cursor:pointer;
+                 font-family:inherit;
+            }
+
 
             header {
                  background-color:cadetblue;
@@ -265,6 +271,11 @@
              Login
         </button>
 
+        <button onclick="window.location.href='cart.html'" style="position:relative;">
+             🛒 Cart
+            <span id="cartCount" style="position:absolute;top:-8px;right:-8px;background:#e91e63;color:white;border-radius:50%;width:22px;height:22px;font-size:13px;display:flex;align-items:center;justify-content:center;">0</span>
+        </button>
+
             <h2>Mika's Flower Shop</h2>
         </header>
          
@@ -285,7 +296,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1000</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Indian PaintBrush&price=1000" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Indian PaintBrush', 1000)">Add to Cart</button>
         </div>
     </div>
 
@@ -296,7 +307,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹800</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Bluebonnet&price=800" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Bluebonnet', 800)">Add to Cart</button>
         </div>
     </div>
 
@@ -307,7 +318,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1600</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Wild Bergamot&price=1600" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Wild Bergamot', 1600)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -317,7 +328,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1200</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Cut Flowers&price=1200" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Cut Flowers', 1200)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -327,7 +338,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1400</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Dalia&price=1400" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Dalia', 1400)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -337,7 +348,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1100</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Zinnia&price=1100" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Zinnia', 1100)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -347,7 +358,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1300</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Ranunculus" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Ranunculus', 1300)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -357,7 +368,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1500</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Anemone&price=1500" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Anemone', 1500)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -367,7 +378,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹900</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Amarnth&price=900" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Amarnth', 900)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -377,7 +388,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1700</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Chrysanthemum&price=1700" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Chrysanthemum', 1700)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -387,7 +398,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1800</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Celosia&price=1800" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Celosia', 1800)">Add to Cart</button>
         </div>
     </div>
       <div class="card">
@@ -397,7 +408,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹1900</h3>   
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Larkspur&price=1900" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Larkspur', 1900)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -407,7 +418,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2000</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Peony&price=2000" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Peony', 2000)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -417,7 +428,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2100</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Gladiolus&price=2100" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Gladiolus', 2100)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -427,7 +438,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2200</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Craspedia&price=2200" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Craspedia', 2200)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -437,7 +448,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2300</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Gomphrena&price=2300" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Gomphrena', 2300)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -447,7 +458,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2400</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Gerbera Daisy&price=2400" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Gerbera Daisy', 2400)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -457,7 +468,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2500</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Snapdragon&price=2500" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Snapdragon', 2500)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -467,7 +478,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2600</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Bells of Ireland&price=2600" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Bells of Ireland', 2600)">Add to Cart</button>
         </div>
     </div>
     <div class="card">
@@ -477,7 +488,7 @@
             <h3>Beautiful Blooms</h3>
             <h3>Price: ₹2700</h3>
             <p>Card description goes here.</p>
-            <a href="buy.html?flower=Strawflower&price=2700" class="button">Buy Now</a>
+            <button class="button add-cart-btn" onclick="addToCart('Strawflower', 2700)">Add to Cart</button>
         </div>
     </div>
     </div>
@@ -568,5 +579,6 @@
     <p>© 2026 Flower Shop | Designed by Sumila 🌸</p>
 </footer>
 
+<script src="cart.js"></script>
 </body>
 </html>
